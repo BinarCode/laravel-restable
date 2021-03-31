@@ -2,9 +2,9 @@
 
 namespace BinarCode\LaravelRestable\Tests;
 
+use BinarCode\LaravelRestable\LaravelRestableServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use BinarCode\LaravelRestable\LaravelRestableServiceProvider;
 
 class TestCase extends Orchestra
 {
