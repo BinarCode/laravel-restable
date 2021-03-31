@@ -2,9 +2,8 @@
 
 namespace BinarCode\LaravelRestable\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use BinarCode\LaravelRestable\LaravelRestableServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
@@ -12,12 +11,10 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\LaravelRestable\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->migrations();
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             LaravelRestableServiceProvider::class,
@@ -32,10 +29,14 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
-
-        /*
-        include_once __DIR__.'/../database/migrations/create_laravel_restable_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
     }
+
+    protected function migrations(): void
+    {
+        $this->loadMigrationsFrom([
+            '--database' => 'sqlite',
+            '--path' => realpath(__DIR__.DIRECTORY_SEPARATOR.'database/migrations'),
+        ]);
+    }
+
 }
