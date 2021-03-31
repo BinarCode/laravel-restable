@@ -4,5 +4,4 @@ namespace BinarCode\LaravelRestable;
 
 trait Restable
 {
-
 }

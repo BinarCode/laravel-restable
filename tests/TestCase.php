@@ -38,5 +38,4 @@ class TestCase extends Orchestra
             '--path' => realpath(__DIR__.DIRECTORY_SEPARATOR.'database/migrations'),
         ]);
     }
-
 }
