@@ -15,7 +15,7 @@ class CreateDreamsTable extends Migration
     {
         Schema::create('dreams', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('dream');
             $table->timestamps();
         });

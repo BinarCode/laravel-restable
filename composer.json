@@ -34,7 +34,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "BinarCode\\LaravelRestable\\Tests\\": "tests"
+            "BinarCode\\LaravelRestable\\Tests\\": "tests",
+            "BinarCode\\LaravelRestable\\Tests\\Database\\Factories\\": "tests/database/Factories"
         }
     },
     "scripts": {
@@ -49,10 +50,7 @@
         "laravel": {
             "providers": [
                 "BinarCode\\LaravelRestable\\LaravelRestableServiceProvider"
-            ],
-            "aliases": {
-                "LaravelRestable": "BinarCode\\LaravelRestable\\LaravelRestableFacade"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

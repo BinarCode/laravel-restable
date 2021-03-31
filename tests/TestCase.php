@@ -31,12 +31,14 @@ class TestCase extends Orchestra
         ]);
     }
 
-    protected function migrations(): void
+    protected function migrations(): self
     {
         $this->loadMigrationsFrom([
             '--database' => 'sqlite',
-            '--path' => realpath(__DIR__.DIRECTORY_SEPARATOR.'database/migrations'),
+            '--path' => realpath(__DIR__ . DIRECTORY_SEPARATOR . 'database/migrations'),
         ]);
+
+        return $this;
     }
 
 }
