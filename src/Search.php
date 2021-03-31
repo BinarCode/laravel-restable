@@ -14,7 +14,8 @@ class Search
         public Request $request,
         public Builder $builder,
         public Model $model
-    ) {}
+    ) {
+    }
 
     public static function search(Request $request, string $modelClass): self
     {
