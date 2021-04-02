@@ -13,9 +13,9 @@ use Illuminate\Support\Str;
 
 abstract class Filter
 {
-    use Maker,
-        HasMode,
-        AuthorizedToUse;
+    use Maker;
+    use HasMode;
+    use AuthorizedToUse;
 
     public string $type;
 

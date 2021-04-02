@@ -43,6 +43,7 @@ class MatchFilter extends Filter
                     } else {
                         $query->where($field, $this->getLikeOperator(), $this->getLikeValue($value));
                     }
+
                     break;
                 case Types::MATCH_BOOL:
                 case 'boolean':
@@ -54,17 +55,21 @@ class MatchFilter extends Filter
 
                             return $query->where($field, '=', false)->orWhereNull($field);
                         });
+
                         break;
                     }
                     $query->where($field, $this->negation ? '!=' : '=', true);
+
                     break;
                 case Types::MATCH_INTEGER:
                 case 'number':
                 case 'int':
                     $query->where($field, $this->negation ? '!=' : '=', (int) $value);
+
                     break;
                 case Types::MATCH_DATETIME:
                     $query->whereDate($field, $this->negation ? '!=' : '=', $value);
+
                     break;
                 case Types::MATCH_DATETIME_INTERVAL:
                     if ($this->negation) {
@@ -72,6 +77,7 @@ class MatchFilter extends Filter
                     } else {
                         $query->whereBetween($field, explode(',', $value));
                     }
+
                     break;
                 case Types::MATCH_ARRAY:
                     $value = explode(',', $value);
@@ -81,6 +87,7 @@ class MatchFilter extends Filter
                     } else {
                         $query->whereIn($field, $value);
                     }
+
                     break;
             }
         }

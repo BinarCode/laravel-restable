@@ -2,7 +2,6 @@
 
 namespace BinarCode\LaravelRestable;
 
-
 use BinarCode\LaravelRestable\Filters\MatchesCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

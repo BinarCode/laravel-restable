@@ -5,7 +5,6 @@ namespace BinarCode\LaravelRestable\Filters;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -55,7 +54,7 @@ class MatchesCollection extends Collection
 
     public function hydrateDefinition(Request $request, Model $model): MatchesCollection
     {
-        return $this->each(function(MatchFilter $filter) use ($model, $request) {
+        return $this->each(function (MatchFilter $filter) use ($model, $request) {
             if ($request->has('-' . $filter->getQueryKey())) {
                 $filter->negate();
             }
@@ -71,7 +70,7 @@ class MatchesCollection extends Collection
 
     public function apply(Request $request, Builder $builder): self
     {
-        return $this->each(function(MatchFilter $filter) use ($request, $builder) {
+        return $this->each(function (MatchFilter $filter) use ($request, $builder) {
             $queryValue = $request->input($filter->negation ? '-' . $filter->getQueryKey() : $filter->getQueryKey());
 
             $filter->apply($request, $builder, $queryValue);
