@@ -33,18 +33,19 @@ class Search
             throw InvalidClass::shouldBe(Restable::class, $modelClass);
         }
 
+        /** * @var Model $modelClass */
         return static::query($request, $modelClass::query());
     }
 
     public static function query(Request $request, Builder $builder): Builder
     {
-        /** * @var Restable $model */
         $model = $builder->getModel();
 
         if (!$model instanceof Restable) {
             throw InvalidClass::shouldBe(Restable::class, $model::class);
         }
 
+        /** * @var Model $model */
         $search = new static($request, $builder, $model);
 
         return $model::restableQuery(
