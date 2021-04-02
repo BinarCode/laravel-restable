@@ -39,5 +39,4 @@ trait HasRestable
             ? static::$defaultPerPage
             : 15;
     }
-
 }

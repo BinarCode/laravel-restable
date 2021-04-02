@@ -14,7 +14,7 @@ class Search
     /**
      * Model used for search.
      *
-     * @var Model|Restable $model
+     * @var Model|Restable
      */
     private Model $model;
 
@@ -22,14 +22,13 @@ class Search
         private Request $request,
         private Builder $builder,
         Model $model
-    )
-    {
+    ) {
         $this->model = $model;
     }
 
     public static function apply(Request $request, string $modelClass): Builder
     {
-        if (!is_subclass_of($modelClass, Restable::class)) {
+        if (! is_subclass_of($modelClass, Restable::class)) {
             throw InvalidClass::shouldBe(Restable::class, $modelClass);
         }
 
@@ -41,7 +40,7 @@ class Search
     {
         $model = $builder->getModel();
 
-        if (!$model instanceof Restable) {
+        if (! $model instanceof Restable) {
             throw InvalidClass::shouldBe(Restable::class, $model::class);
         }
 
@@ -65,7 +64,7 @@ class Search
         }
 
 
-        return $builder->where(function(Builder $query) use ($search) {
+        return $builder->where(function (Builder $query) use ($search) {
             SearchableCollection::make($this->model::searchables())
                 ->mapIntoFilter($this->model)
                 ->apply($this->request, $query, $search);
