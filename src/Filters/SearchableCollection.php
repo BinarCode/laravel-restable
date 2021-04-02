@@ -11,7 +11,7 @@ class SearchableCollection extends Collection
 {
     public function mapIntoFilter(Model $model): self
     {
-        return $this->map(function($column, $key) use ($model) {
+        return $this->map(function ($column, $key) use ($model) {
             $filter = $column instanceof SearchableFilter
                 ? $column
                 : SearchableFilter::make()->setColumn(
@@ -27,6 +27,6 @@ class SearchableCollection extends Collection
 
     public function apply(Request $request, Builder $builder, $value): self
     {
-        return $this->each(fn(SearchableFilter $filter) => $filter->apply($request, $builder, $value));
+        return $this->each(fn (SearchableFilter $filter) => $filter->apply($request, $builder, $value));
     }
 }

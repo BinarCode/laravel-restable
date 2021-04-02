@@ -2,7 +2,6 @@
 
 namespace BinarCode\LaravelRestable\Tests;
 
-
 use BinarCode\LaravelRestable\Tests\Fixtures\Dream;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,7 @@ class SearchTest extends TestCase
             ])
             ->create();
 
-        $request = tap(new Request([], []), fn(Request $request) => $request->merge([
+        $request = tap(new Request([], []), fn (Request $request) => $request->merge([
             'search' => 'Be Happy',
         ]));
 
