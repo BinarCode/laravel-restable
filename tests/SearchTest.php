@@ -4,7 +4,6 @@ namespace BinarCode\LaravelRestable\Tests;
 
 
 use BinarCode\LaravelRestable\Tests\Fixtures\Dream;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 class SearchTest extends TestCase

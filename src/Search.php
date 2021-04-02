@@ -11,18 +11,26 @@ use Illuminate\Http\Request;
 
 class Search
 {
+    /**
+     * Model used for search.
+     *
+     * @var Model|Restable $model
+     */
+    private Model $model;
+
     public function __construct(
-        public Request $request,
-        public Builder $builder,
-        public Model $model
+        private Request $request,
+        private Builder $builder,
+        Model $model
     )
     {
+        $this->model = $model;
     }
 
     public static function apply(Request $request, string $modelClass): Builder
     {
-        if (!is_subclass_of($modelClass, Model::class)) {
-            throw InvalidClass::shouldBe(Model::class);
+        if (!is_subclass_of($modelClass, Restable::class)) {
+            throw InvalidClass::shouldBe(Restable::class, $modelClass);
         }
 
         return static::query($request, $modelClass::query());
@@ -30,12 +38,17 @@ class Search
 
     public static function query(Request $request, Builder $builder): Builder
     {
-        if (!in_array(Restable::class, class_uses_recursive($model = $builder->getModel()))) {
-            throw InvalidClass::shouldUse(Restable::class);
+        /** * @var Restable $model */
+        $model = $builder->getModel();
+
+        if (!$model instanceof Restable) {
+            throw InvalidClass::shouldBe(Restable::class, $model::class);
         }
 
+        $search = new static($request, $builder, $model);
+
         return $model::restableQuery(
-            (new static($request, $builder, $builder->getModel()))->search($builder)
+            $search->search($request, $search->match($request, $builder))
         );
     }
 
@@ -44,7 +57,7 @@ class Search
         return $this->builder->paginate($this->getPerPage());
     }
 
-    public function search(Builder $builder): Builder
+    public function search(Request $request, Builder $builder): Builder
     {
         if (empty($search = $this->request->input('search'))) {
             return $builder;
@@ -58,8 +71,15 @@ class Search
         });
     }
 
+    public function match(Request $request, Builder $query): Builder
+    {
+        $this->model::collectMatches($request, $this->model)->apply($request, $query);
+
+        return $query;
+    }
+
     public function getPerPage(): int
     {
-        return (int)($this->request->input('perPage') ?? ($this->model)::defaultPerPage());
+        return (int)($this->request->input('perPage') ?? $this->model::perPage());
     }
 }

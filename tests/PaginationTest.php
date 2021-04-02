@@ -29,6 +29,6 @@ class PaginationTest extends TestCase
 
         $pagination = Dream::search(request())->paginate();
 
-        $this->assertSame(Dream::defaultPerPage(), $pagination->perPage());
+        $this->assertSame(Dream::perPage(), $pagination->perPage());
     }
 }
