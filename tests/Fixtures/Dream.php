@@ -20,6 +20,10 @@ class Dream extends Model
         'dream',
     ];
 
+    public static array $search = [
+        'id',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -14,10 +14,10 @@ class PaginationTest extends TestCase
         Dream::factory(10)->create();
 
         $request = tap(new Request([], []), fn(Request $request) => $request->merge([
-            'perPage' => '5',
+            'perPage' => 5,
         ]));
 
-        $pagination = Dream::search($request)->paginate();
+        $pagination = Dream::search($request)->paginate($request->perPage);
 
         $this->assertSame(5, $pagination->perPage());
         $this->assertInstanceOf(LengthAwarePaginator::class, $pagination);
@@ -29,6 +29,6 @@ class PaginationTest extends TestCase
 
         $pagination = Dream::search(request())->paginate();
 
-        $this->assertSame(Dream::$defaultPerPage, $pagination->perPage());
+        $this->assertSame(Dream::defaultPerPage(), $pagination->perPage());
     }
 }
