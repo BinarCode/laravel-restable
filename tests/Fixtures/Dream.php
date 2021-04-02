@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Dream extends Model
 {
-    use Restable,
-        HasFactory;
+    use Restable;
+    use HasFactory;
 
     protected $table = 'dreams';
 

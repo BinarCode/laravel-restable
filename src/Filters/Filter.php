@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 abstract class Filter
 {
+<<<<<<< HEAD
     use Maker;
 
     public string $column;
@@ -20,4 +21,6 @@ abstract class Filter
 
         return $this;
     }
+=======
+>>>>>>> bbb1ca0e11d889b0a1a87a5f14e0b69f304ab024
 }
