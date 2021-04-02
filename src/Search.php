@@ -15,13 +15,12 @@ class Search
         public Request $request,
         public Builder $builder,
         public Model $model
-    )
-    {
+    ) {
     }
 
     public static function apply(Request $request, string $modelClass): Builder
     {
-        if (!is_subclass_of($modelClass, Model::class)) {
+        if (! is_subclass_of($modelClass, Model::class)) {
             throw InvalidClass::shouldBe(Model::class);
         }
 
@@ -30,7 +29,7 @@ class Search
 
     public static function query(Request $request, Builder $builder): Builder
     {
-        if (!in_array(Restable::class, class_uses_recursive($model = $builder->getModel()))) {
+        if (! in_array(Restable::class, class_uses_recursive($model = $builder->getModel()))) {
             throw InvalidClass::shouldUse(Restable::class);
         }
 
@@ -51,7 +50,7 @@ class Search
         }
 
 
-        return $builder->where(function(Builder $query) use ($search) {
+        return $builder->where(function (Builder $query) use ($search) {
             SearchableCollection::make($this->model::searchables())
                 ->mapIntoFilter($this->model)
                 ->apply($this->request, $query, $search);

@@ -25,11 +25,11 @@ trait Restable
             : static::$search;
     }
 
-    #[Pure] public static function defaultPerPage(): int
-    {
-        return (int) property_exists(static::class, 'defaultPerPage')
+    #[Pure]
+ public static function defaultPerPage(): int
+ {
+     return (int) property_exists(static::class, 'defaultPerPage')
             ? static::$defaultPerPage
             : 15;
-    }
-
+ }
 }

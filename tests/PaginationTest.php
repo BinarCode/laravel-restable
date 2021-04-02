@@ -2,7 +2,6 @@
 
 namespace BinarCode\LaravelRestable\Tests;
 
-
 use BinarCode\LaravelRestable\Tests\Fixtures\Dream;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
@@ -13,7 +12,7 @@ class PaginationTest extends TestCase
     {
         Dream::factory(10)->create();
 
-        $request = tap(new Request([], []), fn(Request $request) => $request->merge([
+        $request = tap(new Request([], []), fn (Request $request) => $request->merge([
             'perPage' => 5,
         ]));
 
