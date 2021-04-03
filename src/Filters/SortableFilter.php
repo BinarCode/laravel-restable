@@ -43,7 +43,7 @@ class SortableFilter extends Filter
 
     public function syncDirection(string $direction = null): self
     {
-        if (!is_null($direction) && in_array($direction, ['asc', 'desc'])) {
+        if (! is_null($direction) && in_array($direction, ['asc', 'desc'])) {
             $this->direction = $direction;
 
             return $this;

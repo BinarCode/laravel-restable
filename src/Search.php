@@ -63,7 +63,7 @@ class Search
         }
 
         return $builder->where(
-            fn(Builder $query) => $this->model::collectSearch($request, $this->model)->apply($request, $query, $search)
+            fn (Builder $query) => $this->model::collectSearch($request, $this->model)->apply($request, $query, $search)
         );
     }
 
