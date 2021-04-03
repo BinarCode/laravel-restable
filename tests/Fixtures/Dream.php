@@ -29,6 +29,10 @@ class Dream extends Model implements Restable
         'dream',
     ];
 
+    public static array $sort = [
+        'dream',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

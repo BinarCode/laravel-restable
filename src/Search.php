@@ -3,7 +3,6 @@
 namespace BinarCode\LaravelRestable;
 
 use BinarCode\LaravelRestable\Exceptions\InvalidClass;
-use BinarCode\LaravelRestable\Filters\SearchableCollection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -48,7 +47,7 @@ class Search
         $search = new static($request, $builder, $model);
 
         return $model::restableQuery(
-            $search->search($request, $search->match($request, $builder))
+            $search->search($request, $search->match($request, $search->sorts($request, $builder)))
         );
     }
 
@@ -63,17 +62,21 @@ class Search
             return $builder;
         }
 
-
-        return $builder->where(function (Builder $query) use ($search) {
-            SearchableCollection::make($this->model::searchables())
-                ->mapIntoFilter($this->model)
-                ->apply($this->request, $query, $search);
-        });
+        return $builder->where(
+            fn(Builder $query) => $this->model::collectSearch($request, $this->model)->apply($request, $query, $search)
+        );
     }
 
     public function match(Request $request, Builder $query): Builder
     {
         $this->model::collectMatches($request, $this->model)->apply($request, $query);
+
+        return $query;
+    }
+
+    public function sorts(Request $request, Builder $query): Builder
+    {
+        $this->model::collectSorts($request, $this->model)->apply($request, $query);
 
         return $query;
     }

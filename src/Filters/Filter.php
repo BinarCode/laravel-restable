@@ -4,8 +4,8 @@ namespace BinarCode\LaravelRestable\Filters;
 
 use BinarCode\LaravelRestable\Filters\Concerns\AuthorizedToUse;
 use BinarCode\LaravelRestable\Filters\Concerns\HasMode;
+use BinarCode\LaravelRestable\Filters\Concerns\HasResolver;
 use BinarCode\LaravelRestable\Maker;
-use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -15,15 +15,14 @@ abstract class Filter
 {
     use Maker;
     use HasMode;
+    use HasResolver;
     use AuthorizedToUse;
 
     public string $type;
 
-    public ?Model $model;
-
     public string $column;
 
-    public Closure $canSeeCallback;
+    public ?Model $model;
 
     public function __construct($type = 'value')
     {
@@ -36,7 +35,7 @@ abstract class Filter
         static::booted();
     }
 
-    protected static function booted()
+    protected static function booted(): void
     {
         //
     }

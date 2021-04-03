@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
  */
 trait HasRestable
 {
+    use HasSorts;
+    use HasSearch;
     use HasMatchers;
 
     public static function restableQuery(Builder $query): Builder
@@ -24,13 +26,6 @@ trait HasRestable
     public static function search(Request $request): Builder
     {
         return Search::apply($request, static::class);
-    }
-
-    public static function searchables(): array
-    {
-        return empty(static::$search)
-            ? [(new static)->getKeyName()]
-            : static::$search;
     }
 
     public static function perPage(): int

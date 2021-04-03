@@ -10,13 +10,9 @@ use Illuminate\Support\Str;
 
 class MatchFilter extends Filter
 {
-    public static $uriKey = 'matches';
+    public const TYPE = 'matchable';
 
     public bool $negation = false;
-
-    private ?Closure $resolver = null;
-
-    public const TYPE = 'matchable';
 
     public string $matchType = 'text';
 
@@ -111,13 +107,6 @@ class MatchFilter extends Filter
 
             return $this;
         }
-
-        return $this;
-    }
-
-    public function usingClosure(Closure $closure): self
-    {
-        $this->resolver = $closure;
 
         return $this;
     }

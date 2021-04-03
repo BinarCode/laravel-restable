@@ -20,7 +20,7 @@ class MatchesCollection extends Collection
                 : tap(MatchFilter::make(), fn (MatchFilter $filter) => is_string($matchType) ? $filter->setMatchType($matchType) : '');
 
             if ($matchType instanceof Closure) {
-                $definition->usingClosure($matchType);
+                $definition->resolveUsing($matchType);
             }
 
             $definition->setColumn(
