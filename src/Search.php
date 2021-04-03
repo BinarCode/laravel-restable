@@ -10,19 +10,11 @@ use Illuminate\Http\Request;
 
 class Search
 {
-    /**
-     * Model used for search.
-     *
-     * @var Model|Restable
-     */
-    private Model $model;
-
     public function __construct(
         private Request $request,
         private Builder $builder,
-        Model $model
+        private Restable|Model $model
     ) {
-        $this->model = $model;
     }
 
     public static function apply(Request $request, string $modelClass): Builder
@@ -43,7 +35,6 @@ class Search
             throw InvalidClass::shouldBe(Restable::class, $model::class);
         }
 
-        /** * @var Model $model */
         $search = new static($request, $builder, $model);
 
         return $model::restableQuery(
