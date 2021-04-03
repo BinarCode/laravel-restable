@@ -13,7 +13,7 @@ class Search
     public function __construct(
         private Request $request,
         private Builder $builder,
-        private Restable|Model $model
+        private Restable | Model $model
     ) {
     }
 
