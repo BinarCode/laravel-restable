@@ -26,7 +26,7 @@ class Dream extends Model implements Restable
     ];
 
     public static array $match = [
-        'dream',
+        'dream' => 'string',
     ];
 
     public static array $sort = [
