@@ -2,7 +2,6 @@
 
 namespace BinarCode\LaravelRestable;
 
-use BinarCode\LaravelRestable\Filters\MatchesCollection;
 use BinarCode\LaravelRestable\Filters\SortCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -25,5 +24,4 @@ trait HasSorts
             ->inModel($request, $model)
             ->hydrateModel($model);
     }
-
 }

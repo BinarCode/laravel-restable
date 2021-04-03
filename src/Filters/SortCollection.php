@@ -24,6 +24,7 @@ class SortCollection extends Collection
 
             if ($queryKey instanceof SortableFilter) {
                 $unified[] = $queryKey;
+
                 continue;
             }
 
@@ -58,8 +59,8 @@ class SortCollection extends Collection
     public function hydrateDefinition(Model $model): self
     {
         /** * @var Restable $model */
-        return $this->map(function(SortableFilter $filter) use ($model) {
-            if (!array_key_exists($filter->column, $model::sorts())) {
+        return $this->map(function (SortableFilter $filter) use ($model) {
+            if (! array_key_exists($filter->column, $model::sorts())) {
                 return $filter;
             }
 
@@ -84,7 +85,7 @@ class SortCollection extends Collection
 
     public function apply(Request $request, Builder $builder): self
     {
-        return $this->each(function(SortableFilter $filter) use ($request, $builder) {
+        return $this->each(function (SortableFilter $filter) use ($request, $builder) {
             $filter->apply($request, $builder, $filter->direction());
         });
     }

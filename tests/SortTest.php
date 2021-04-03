@@ -2,9 +2,7 @@
 
 namespace BinarCode\LaravelRestable\Tests;
 
-use BinarCode\LaravelRestable\Filters\MatchFilter;
 use BinarCode\LaravelRestable\Tests\Fixtures\Dream;
-use BinarCode\LaravelRestable\Types;
 use Illuminate\Http\Request;
 
 class SortTest extends TestCase
