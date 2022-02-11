@@ -11,7 +11,7 @@ trait HasSorts
     public static function sorts(): array
     {
         return empty(static::$sort)
-            ? [(new static)->getQualifiedKeyName()]
+            ? [(new static())->getQualifiedKeyName()]
             : static::$sort;
     }
 

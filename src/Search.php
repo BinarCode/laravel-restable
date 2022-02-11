@@ -23,7 +23,9 @@ class Search
             throw InvalidClass::shouldBe(Restable::class, $modelClass);
         }
 
-        /** * @var Model $modelClass */
+        /**
+         * @var Model $modelClass
+         */
         return static::query($request, $modelClass::query());
     }
 
