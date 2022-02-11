@@ -11,7 +11,7 @@ trait HasSearch
     public static function searchables(): array
     {
         return empty(static::$search)
-            ? [(new static)->getQualifiedKeyName()]
+            ? [(new static())->getQualifiedKeyName()]
             : static::$search;
     }
 

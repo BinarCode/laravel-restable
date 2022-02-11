@@ -11,7 +11,7 @@ trait HasMatchers
     public static function matches(): array
     {
         return empty(static::$match)
-            ? [(new static)->getQualifiedKeyName()]
+            ? [(new static())->getQualifiedKeyName()]
             : static::$match;
     }
 
