@@ -45,8 +45,10 @@ class SortCollection extends Collection
 
     public function inModel(Request $request, Model $model): self
     {
-        /** * @var Restable $model */
-        $collection = static::make($model::sorts());
+        /**
+         * @var Restable $model
+         */
+        $collection = SortCollection::make($model::sorts());
 
         return $this->filter(fn (SortableFilter $filter) => $collection->contains('column', '=', $filter->column));
     }
@@ -58,17 +60,15 @@ class SortCollection extends Collection
 
     public function hydrateDefinition(Model $model): self
     {
-        /** * @var Restable $model */
+        /**
+         * @var Restable $model
+         */
         return $this->map(function (SortableFilter $filter) use ($model) {
             if (! array_key_exists($filter->column, $model::sorts())) {
                 return $filter;
             }
 
             $definition = Arr::get($model::sorts(), $filter->getColumn());
-
-            if (is_callable($definition)) {
-                return $filter->usingClosure($definition);
-            }
 
             if ($definition instanceof SortableFilter) {
                 return $definition->syncDirection($filter->direction());
